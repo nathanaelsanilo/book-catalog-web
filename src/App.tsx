@@ -1,13 +1,11 @@
-import { useEffect } from 'react';
-import { authService } from '@/services';
 import './App.css';
 
 function App() {
-  useEffect(() => {
-    authService.signin();
-  }, []);
-
-  return <></>;
+  return (
+    <div>
+      <h1 className='text-3xl font-bold underline'>Hello world!</h1>
+    </div>
+  );
 }
 
 export default App;
