@@ -2,7 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import '../node_modules/notie/dist/notie.min.css';
+import './index.scss';
 import { router } from './router/index.ts';
 
 const queryClient = new QueryClient();
