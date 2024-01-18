@@ -20,7 +20,7 @@ const SignupPage = () => {
 
   return (
     <div className='h-full flex justify-center items-center flex-col'>
-      <div className='p-4 w-96'>
+      <div className='px-12 py-8 w-1/2 border shadow rounded-lg bg-white'>
         <div className=''>
           <div className='mb-12'>
             <HiUserGroup className='h-full fill-blue-700 w-20 mx-auto' />
@@ -33,7 +33,7 @@ const SignupPage = () => {
           <AuthForm isSignup={true} onSubmit={onSubmit} loading={isPending} />
           <div className='mt-10 text-center'>
             <span className='text-gray-400 text-sm'>
-              <Link to='/' className='text-blue-400'>
+              <Link to='/signin' className='text-blue-400'>
                 Login
               </Link>{' '}
               to your account instead

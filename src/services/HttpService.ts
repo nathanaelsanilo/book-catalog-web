@@ -7,6 +7,16 @@ const instance = axios.create({
   },
 });
 
+instance.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (err) => {
+    console.log({ err });
+    return Promise.reject(err);
+  },
+);
+
 const httpService = {
   get<TResponse>(
     url: string,

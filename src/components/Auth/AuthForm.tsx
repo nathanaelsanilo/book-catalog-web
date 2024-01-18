@@ -22,7 +22,7 @@ const AuthForm = ({ onSubmit: propOnSubmit, loading, isSignup }: Props) => {
         <input
           type='text'
           id='username'
-          className='rounded-md text-gray-700 border-gray-300 shadow-sm'
+          className='rounded-md text-gray-700 border-gray-300 shadow-sm bg-gray-50'
           {...register('username', { required: true })}
         />
         <p className=''>
@@ -41,7 +41,7 @@ const AuthForm = ({ onSubmit: propOnSubmit, loading, isSignup }: Props) => {
           type='password'
           {...register('password', { required: true })}
           id='password'
-          className='rounded-md text-gray-700 border-gray-300 shadow-sm'
+          className='rounded-md text-gray-700 border-gray-300 shadow-sm bg-gray-50'
         />
         <p className=''>
           {errors.password ? (

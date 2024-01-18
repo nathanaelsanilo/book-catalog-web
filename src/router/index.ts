@@ -1,5 +1,6 @@
 import App from '@/App';
 import AuthLayout from '@/layouts/AuthLayout';
+import SigninPage from '@/pages/auth/SigninPage';
 import SignupPage from '@/pages/auth/SignupPage';
 import { RootRoute, Route, Router } from '@tanstack/react-router';
 
@@ -19,8 +20,14 @@ const SignupRoute = new Route({
   component: SignupPage,
 });
 
+const SigninRoute = new Route({
+  getParentRoute: () => AuthLayoutRoute,
+  path: 'signin',
+  component: SigninPage,
+});
+
 const routeTree = rootRoute.addChildren([
-  AuthLayoutRoute.addChildren([SignupRoute]),
+  AuthLayoutRoute.addChildren([SignupRoute, SigninRoute]),
 ]);
 
 export const router = new Router({ routeTree });
