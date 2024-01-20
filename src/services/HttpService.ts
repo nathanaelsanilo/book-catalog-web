@@ -1,3 +1,4 @@
+import { StorageKey } from '@/const';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 
 const instance = axios.create({
@@ -6,6 +7,22 @@ const instance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+const noAuthRoutes = ['/auth/signin', '/auth/signup'];
+
+instance.interceptors.request.use(
+  (req) => {
+    const token = localStorage.getItem(StorageKey.AccessToken);
+    if (req.url && !noAuthRoutes.includes(req.url) && token) {
+      req.headers.Authorization = `Bearer ${token}`;
+    }
+    return req;
+  },
+  (err) => {
+    console.log({ err });
+    return Promise.reject(err);
+  },
+);
 
 instance.interceptors.response.use(
   (res) => {

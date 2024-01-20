@@ -5,6 +5,7 @@ import HomePage from '@/pages/HomePage';
 import SigninPage from '@/pages/auth/SigninPage';
 import SignupPage from '@/pages/auth/SignupPage';
 import AuthorIndexPage from '@/pages/author/IndexPage';
+import AuthorFormPage from '@/pages/author/FormPage';
 import { RootRoute, Route, Router } from '@tanstack/react-router';
 
 const rootRoute = new RootRoute({
@@ -53,11 +54,17 @@ const AuthorIndexRoute = new Route({
   component: AuthorIndexPage,
 });
 
+const AuthorFormRoute = new Route({
+  getParentRoute: () => AppLayoutRoute,
+  path: 'author/create',
+  component: AuthorFormPage,
+});
+
 // #endregion
 
 const routeTree = rootRoute.addChildren([
   AuthLayoutRoute.addChildren([SignupRoute, SigninRoute]),
-  AppLayoutRoute.addChildren([HomeRoute, AuthorIndexRoute]),
+  AppLayoutRoute.addChildren([HomeRoute, AuthorIndexRoute, AuthorFormRoute]),
 ]);
 
 export const router = new Router({ routeTree });

@@ -2,17 +2,19 @@ import { AuthForm, SigninIllustration, type AuthField } from '@/components';
 import { StorageKey } from '@/const';
 import { SigninDto } from '@/dtos';
 import { useNotie, useSigninMutation } from '@/hooks';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { PiKeyFill } from 'react-icons/pi';
 
 const SigninPage = () => {
   const { success } = useNotie();
+  const navigate = useNavigate({ from: '/signin' });
   const { mutate, isPending } = useSigninMutation({
     onSuccess({ data }) {
       localStorage.setItem(StorageKey.AccessToken, data.access_token);
       success({
-        text: 'Signin Successfully!',
+        text: 'Sign in Successfully!',
       });
+      navigate({ to: '/' });
     },
   });
 
