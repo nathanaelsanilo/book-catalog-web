@@ -1,7 +1,11 @@
 import { AuthorCard, RTitle, RButton, RDivider } from '@/components';
+import { useAuthorListQuery } from '@/hooks';
 import { Link } from '@tanstack/react-router';
+import { useTitle } from 'react-use';
 
 const IndexPage = () => {
+  useTitle('Authors');
+  const { data, isLoading } = useAuthorListQuery();
   return (
     <section>
       <div className='flex items-center justify-between'>
@@ -12,9 +16,16 @@ const IndexPage = () => {
       </div>
       <RDivider />
       <div className='grid gap-x-6 gap-y-8 grid-cols-4'>
-        {[1, 2].map((e) => (
-          <AuthorCard key={e} />
-        ))}
+        {!isLoading && data
+          ? data.data.map((e) => (
+              <AuthorCard
+                email={e.email}
+                phone={e.phone}
+                name={e.name}
+                key={e.secureId}
+              />
+            ))
+          : 'loading..'}
       </div>
     </section>
   );

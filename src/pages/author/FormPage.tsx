@@ -3,6 +3,7 @@ import { AuthorCreateDto } from '@/dtos';
 import { useAuthorCreateMutation, useNotie } from '@/hooks';
 import { useNavigate } from '@tanstack/react-router';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTitle } from 'react-use';
 
 type FormValues = {
   authorName: string;
@@ -11,6 +12,7 @@ type FormValues = {
 };
 
 const FormPage = () => {
+  useTitle('Create Author');
   const { success } = useNotie();
   const navigate = useNavigate({ from: '/author/create' });
   const methods = useForm<FormValues>();

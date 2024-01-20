@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
 
-export type HttpResponse<TResponse, TRequest> = Promise<
+export type HttpResponse<TResponse, TRequest = unknown> = Promise<
   AxiosResponse<TResponse, TRequest>
 >;

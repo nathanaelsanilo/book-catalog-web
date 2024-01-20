@@ -3,8 +3,10 @@ import { SignupDto } from '@/dtos';
 import { useNotie, useSignupMutation } from '@/hooks';
 import { Link } from '@tanstack/react-router';
 import { HiUserGroup } from 'react-icons/hi2';
+import { useTitle } from 'react-use';
 
 const SignupPage = () => {
+  useTitle('Sign up');
   const { success } = useNotie();
   const { mutate, isPending } = useSignupMutation({
     onSuccess() {

@@ -4,8 +4,10 @@ import { SigninDto } from '@/dtos';
 import { useNotie, useSigninMutation } from '@/hooks';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { PiKeyFill } from 'react-icons/pi';
+import { useTitle } from 'react-use';
 
 const SigninPage = () => {
+  useTitle('Sign In');
   const { success } = useNotie();
   const navigate = useNavigate({ from: '/signin' });
   const { mutate, isPending } = useSigninMutation({
