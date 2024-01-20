@@ -2,17 +2,32 @@ import { clsxm } from '@/utils';
 import { ComponentPropsWithoutRef } from 'react';
 import { CgSpinnerAlt } from 'react-icons/cg';
 
+type Variant = 'blue' | 'default' | 'ghost';
 type Props = {
   block?: boolean;
   children?: React.ReactNode;
   loading?: boolean;
+  variant?: Variant;
 } & ComponentPropsWithoutRef<'button'>;
 
-const RButton = ({ loading, block, children, disabled, ...rest }: Props) => {
+const RButton = ({
+  variant = 'default',
+  loading,
+  block,
+  children,
+  disabled,
+  ...rest
+}: Props) => {
   const isDisabled = loading || disabled;
   const classes = clsxm(
-    'rounded-lg border bg-blue-700 text-white active:bg-blue-900 hover:bg-blue-500 px-4 py-2 min-w-32 font-normal',
+    'rounded-lg border text-white px-4 py-2 min-w-32 font-normal shadow transition-all ease-in-out',
     {
+      'border-0 active:bg-slate-200 hover:bg-slate-100 shadow-none text-gray-900 ':
+        variant === 'ghost',
+      'bg-white active:bg-slate-200 hover:bg-slate-100 text-gray-900':
+        variant === 'default',
+      'bg-blue-700 text-white active:bg-blue-900 hover:bg-blue-500':
+        variant === 'blue',
       'w-full': block,
       'bg-blue-400 cursor-not-allowed hover:bg-blue-400 active:bg-blue-400':
         isDisabled,

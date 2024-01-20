@@ -52,7 +52,7 @@ const AuthForm = ({ onSubmit: propOnSubmit, loading, isSignup }: Props) => {
         </p>
       </div>
       <div className='text-center'>
-        <RButton type='submit' loading={loading} block={true}>
+        <RButton type='submit' variant='blue' loading={loading} block={true}>
           {isSignup ? 'Register' : 'Login'}
         </RButton>
       </div>
