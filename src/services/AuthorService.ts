@@ -1,5 +1,10 @@
 import { Endpoint } from '@/const';
-import { AuthorCreateDto, AuthorDetailDto, AuthorListDto } from '@/dtos';
+import {
+  AuthorCreateDto,
+  AuthorDetailDto,
+  AuthorListDto,
+  AuthorUpdateDto,
+} from '@/dtos';
 import { httpService } from '@/services';
 import { HttpResponse } from '@/types';
 
@@ -14,6 +19,12 @@ const authorService = {
   },
   getDetail(secureId: string): HttpResponse<AuthorDetailDto> {
     return httpService.get(Endpoint.AUTHOR_DETAIL(secureId));
+  },
+  update(
+    secureId: string,
+    data: AuthorUpdateDto,
+  ): HttpResponse<AuthorDetailDto, AuthorUpdateDto> {
+    return httpService.patch(Endpoint.AUTHOR_UPDATE(secureId), data);
   },
 };
 

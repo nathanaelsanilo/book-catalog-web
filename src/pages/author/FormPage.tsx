@@ -1,7 +1,13 @@
 import { RButton, RDivider, RTextField, RTitle } from '@/components';
-import { AuthorCreateDto } from '@/dtos';
-import { useAuthorCreateMutation, useNotie } from '@/hooks';
-import { useNavigate } from '@tanstack/react-router';
+import { AuthorCreateDto, AuthorUpdateDto } from '@/dtos';
+import {
+  useAuthorCreateMutation,
+  useAuthorDetailQuery,
+  useAuthorUpdateMutation,
+  useNotie,
+} from '@/hooks';
+import { useNavigate, useParams } from '@tanstack/react-router';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTitle } from 'react-use';
 
@@ -12,28 +18,61 @@ type FormValues = {
 };
 
 const FormPage = () => {
-  useTitle('Create Author');
+  const { authorId } = useParams({ strict: false });
+  const [isEdit] = useState<boolean>(!!authorId);
+  useTitle(isEdit ? 'Edit Author' : 'Create new Author');
+  const { data } = useAuthorDetailQuery(authorId, { enabled: !!authorId });
   const { success } = useNotie();
-  const navigate = useNavigate({ from: '/author/create' });
-  const methods = useForm<FormValues>();
-  const { mutate, isPending } = useAuthorCreateMutation({
-    onSuccess({ data }) {
+  const navigate = useNavigate({
+    from: isEdit ? '/author/$authorId/edit' : '/author/create',
+  });
+  const methods = useForm<FormValues>({
+    values: {
+      authorName: data?.data.author_name ?? '',
+      email: data?.data.email ?? '',
+      phone: data?.data.phone ?? '',
+    },
+  });
+
+  const { mutate: doCreate, isPending: isCreating } = useAuthorCreateMutation({
+    onSuccess: ({ data }) => {
       success({ text: `${data.author_name} created!` });
       navigate({ to: '/author' });
     },
   });
 
+  const { mutate: doUpdate, isPending: isUpdating } = useAuthorUpdateMutation({
+    onSuccess: ({ data }) => {
+      success({ text: `${data.author_name} updated!` });
+      navigate({
+        to: '/author/$authorId',
+        params: { authorId: data.secureId },
+      });
+    },
+  });
+
   const onSubmit = (val: FormValues) => {
-    const dto = new AuthorCreateDto();
-    dto.setAuthorName(val.authorName);
-    dto.setEmail(val.email);
-    dto.setPhone(val.phone);
-    mutate(dto);
+    if (isEdit) {
+      const dto = new AuthorUpdateDto();
+      dto.setAuthorName(val.authorName);
+      dto.setEmail(val.email);
+      dto.setPhone(val.phone);
+      doUpdate({ secureId: authorId, payload: dto });
+    } else {
+      const dto = new AuthorCreateDto();
+      dto.setAuthorName(val.authorName);
+      dto.setEmail(val.email);
+      dto.setPhone(val.phone);
+      doCreate(dto);
+    }
   };
+
+  const isLoading = isCreating || isUpdating;
+
   return (
     <section>
       <div className='flex items-center justify-between'>
-        <RTitle>Create new author</RTitle>
+        <RTitle>{isEdit ? 'Edit author' : 'Create new author'}</RTitle>
       </div>
       <RDivider />
       <div className='mx-auto w-1/2'>
@@ -43,7 +82,9 @@ const FormPage = () => {
             noValidate
             onSubmit={methods.handleSubmit(onSubmit)}
           >
-            <h2 className='text-lg font-bold mb-4'>Create new author</h2>
+            <h2 className='text-lg font-bold mb-4'>
+              {isEdit ? 'Edit author' : 'Create new author'}
+            </h2>
             <div className='space-y-4'>
               <RTextField
                 validation={{ required: 'Required!' }}
@@ -68,8 +109,8 @@ const FormPage = () => {
                   />
                 </div>
               </div>
-              <RButton variant='blue' type='submit' loading={isPending}>
-                Add author
+              <RButton variant='blue' type='submit' loading={isLoading}>
+                {isEdit ? 'Update author' : 'Add author'}
               </RButton>
             </div>
           </form>

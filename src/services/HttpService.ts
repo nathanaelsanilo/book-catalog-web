@@ -1,6 +1,7 @@
 import { StorageKey } from '@/const';
-import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 import { router } from '@/router';
+import { HttpResponse } from '@/types';
+import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 
 const instance = axios.create({
   baseURL: '/api',
@@ -58,6 +59,16 @@ const httpService = {
     config?: AxiosRequestConfig<TData>,
   ): Promise<AxiosResponse<TResponse, TData>> {
     return instance.post(url, data, config);
+  },
+  patch<TResponse, TData>(
+    url: string,
+    data: TData,
+  ): HttpResponse<TResponse, TData> {
+    return instance.request({
+      url,
+      method: 'PATCH',
+      data,
+    });
   },
 } as const;
 

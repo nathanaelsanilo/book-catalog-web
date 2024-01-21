@@ -5,4 +5,5 @@ export const Endpoint = {
   AUTHOR_CREATE: '/author',
   AUTHOR_LIST: '/author',
   AUTHOR_DETAIL: (secureId: string) => `/author/${secureId}`,
+  AUTHOR_UPDATE: (secureId: string) => `/author/${secureId}`,
 } as const;
