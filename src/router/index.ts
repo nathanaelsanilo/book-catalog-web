@@ -4,8 +4,8 @@ import AuthLayout from '@/layouts/AuthLayout';
 import HomePage from '@/pages/HomePage';
 import SigninPage from '@/pages/auth/SigninPage';
 import SignupPage from '@/pages/auth/SignupPage';
-import AuthorIndexPage from '@/pages/author/IndexPage';
 import AuthorFormPage from '@/pages/author/FormPage';
+import AuthorIndexPage from '@/pages/author/IndexPage';
 import { RootRoute, Route, Router } from '@tanstack/react-router';
 
 const rootRoute = new RootRoute({
@@ -48,15 +48,20 @@ const HomeRoute = new Route({
 
 // #region author routes
 
-const AuthorIndexRoute = new Route({
+const AuthorRoute = new Route({
   getParentRoute: () => AppLayoutRoute,
   path: 'author',
+});
+
+const AuthorIndexRoute = new Route({
+  getParentRoute: () => AuthorRoute,
+  path: '/',
   component: AuthorIndexPage,
 });
 
 const AuthorFormRoute = new Route({
-  getParentRoute: () => AppLayoutRoute,
-  path: 'author/create',
+  getParentRoute: () => AuthorRoute,
+  path: 'create',
   component: AuthorFormPage,
 });
 
@@ -64,7 +69,10 @@ const AuthorFormRoute = new Route({
 
 const routeTree = rootRoute.addChildren([
   AuthLayoutRoute.addChildren([SignupRoute, SigninRoute]),
-  AppLayoutRoute.addChildren([HomeRoute, AuthorIndexRoute, AuthorFormRoute]),
+  AppLayoutRoute.addChildren([
+    HomeRoute,
+    AuthorRoute.addChildren([AuthorIndexRoute, AuthorFormRoute]),
+  ]),
 ]);
 
 export const router = new Router({ routeTree });

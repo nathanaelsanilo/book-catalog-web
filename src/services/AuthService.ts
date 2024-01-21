@@ -1,14 +1,17 @@
 import { Endpoint } from '@/const';
-import type { SigninDto, SigninResDto, SignupDto } from '@/dtos';
-import { type AxiosResponse } from 'axios';
+import type { SigninDto, SigninResDto, SignupDto, UserDetailDto } from '@/dtos';
+import { HttpResponse } from '@/types';
 import { httpService } from '.';
 
 const authService = {
-  signup(dto: SignupDto): Promise<AxiosResponse<void, SignupDto>> {
+  signup(dto: SignupDto): HttpResponse<void, SignupDto> {
     return httpService.post(Endpoint.SIGNUP, dto);
   },
-  signin(dto: SigninDto): Promise<AxiosResponse<SigninResDto>> {
+  signin(dto: SigninDto): HttpResponse<SigninResDto> {
     return httpService.post(Endpoint.SIGNIN, dto);
+  },
+  getMe(): HttpResponse<UserDetailDto> {
+    return httpService.get(Endpoint.ME);
   },
 };
 

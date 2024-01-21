@@ -1,5 +1,6 @@
 import { StorageKey } from '@/const';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import { router } from '@/router';
 
 const instance = axios.create({
   baseURL: '/api',
@@ -19,17 +20,27 @@ instance.interceptors.request.use(
     return req;
   },
   (err) => {
-    console.log({ err });
+    console.log({ err, from: 'req' });
     return Promise.reject(err);
   },
 );
 
 instance.interceptors.response.use(
   (res) => {
+    if (res.data && res.data.statusCode === 401) {
+      console.log('res: do logout');
+    }
     return res;
   },
   (err) => {
     console.log({ err });
+    // const setUser = useAuthStore((st) => st.setUser);
+    if (err.response.status === 401) {
+      // setUser(new UserDetailDto());
+      console.log('Unauthorized');
+      localStorage.clear();
+      router.navigate({ to: '/signin' });
+    }
     return Promise.reject(err);
   },
 );

@@ -5,7 +5,15 @@ const AppHeader = () => {
   return (
     <header className='bg-white h-16 w-full px-16 py-4 flex items-center justify-between'>
       <div>
-        <ul>
+        <ul className='flex gap-x-4'>
+          <li>
+            <Link
+              to='/'
+              className='hover:text-blue-700 transition-all ease-in-out'
+            >
+              Home
+            </Link>
+          </li>
           <li>
             <Link
               to='/author'
