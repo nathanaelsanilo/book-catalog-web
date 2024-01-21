@@ -1,16 +1,36 @@
 import { RButton, RDivider, RTitle } from '@/components';
-import { useAuthorDetailQuery } from '@/hooks';
-import { Link, useParams } from '@tanstack/react-router';
+import {
+  useAuthorDeleteMutation,
+  useAuthorDetailQuery,
+  useNotie,
+} from '@/hooks';
+import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { FiTrash } from 'react-icons/fi';
 import { GoPencil } from 'react-icons/go';
 import { useTitle } from 'react-use';
 
 const DetailPage = () => {
   useTitle('Detail Author');
-  const { authorId } = useParams({ from: '/app-layout/author/$authorId' });
+  const { authorId } = useParams({ strict: false });
   const { data, isLoading } = useAuthorDetailQuery(authorId, {
     enabled: !!authorId,
   });
+  const { success } = useNotie();
+  const navigate = useNavigate();
+
+  const { mutate, isPending } = useAuthorDeleteMutation({
+    onSuccess: ({ data }) => {
+      success({
+        text: `${data.author_name} deleted!`,
+      });
+      navigate({ to: '/author' });
+    },
+  });
+
+  const handleDelete = () => {
+    mutate(authorId);
+  };
+
   return (
     <section>
       <div className='flex items-center justify-between'>
@@ -71,7 +91,7 @@ const DetailPage = () => {
               <span className=''>Edit</span>
             </RButton>
           </Link>
-          <RButton>
+          <RButton variant='red' loading={isPending} onClick={handleDelete}>
             <FiTrash className='w-4 h-4 inline align-text-top mr-2' />
             <span className=''>Delete</span>
           </RButton>

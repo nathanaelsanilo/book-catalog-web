@@ -9,7 +9,7 @@ import { useTitle } from 'react-use';
 const SigninPage = () => {
   useTitle('Sign In');
   const { success } = useNotie();
-  const navigate = useNavigate({ from: '/signin' });
+  const navigate = useNavigate();
   const { mutate, isPending } = useSigninMutation({
     onSuccess({ data }) {
       localStorage.setItem(StorageKey.AccessToken, data.access_token);

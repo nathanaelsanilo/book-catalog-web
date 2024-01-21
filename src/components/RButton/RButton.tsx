@@ -2,7 +2,7 @@ import { clsxm } from '@/utils';
 import { ComponentPropsWithoutRef } from 'react';
 import { CgSpinnerAlt } from 'react-icons/cg';
 
-type Variant = 'blue' | 'default' | 'ghost';
+type Variant = 'blue' | 'default' | 'ghost' | 'red';
 type Props = {
   block?: boolean;
   children?: React.ReactNode;
@@ -28,6 +28,8 @@ const RButton = ({
         variant === 'default',
       'bg-blue-700 text-white active:bg-blue-900 hover:bg-blue-500':
         variant === 'blue',
+      'bg-red-600 text-white active:bg-red-900 hover:bg-red-500':
+        variant === 'red',
       'w-full': block,
       'bg-blue-400 cursor-not-allowed hover:bg-blue-400 active:bg-blue-400':
         isDisabled,

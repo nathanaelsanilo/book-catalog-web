@@ -1,4 +1,5 @@
 export * from './useAuthorCreateMutation';
+export * from './useAuthorDeleteMutation';
 export * from './useAuthorDetailQuery';
 export * from './useAuthorListQuery';
 export * from './useAuthorUpdateMutation';

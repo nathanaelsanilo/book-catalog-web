@@ -7,7 +7,7 @@ import { HiLogout } from 'react-icons/hi';
 
 const AppHeader = () => {
   const { data, isLoading } = useMeQuery();
-  const navigate = useNavigate({ from: '*' });
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();

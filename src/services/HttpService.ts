@@ -2,6 +2,7 @@ import { StorageKey } from '@/const';
 import { router } from '@/router';
 import { HttpResponse } from '@/types';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import { alert } from 'notie';
 
 const instance = axios.create({
   baseURL: '/api',
@@ -35,10 +36,11 @@ instance.interceptors.response.use(
   },
   (err) => {
     console.log({ err });
-    // const setUser = useAuthStore((st) => st.setUser);
+    alert({
+      text: err.response.data.message ?? 'Something wrong',
+      type: 'error',
+    });
     if (err.response.status === 401) {
-      // setUser(new UserDetailDto());
-      console.log('Unauthorized');
       localStorage.clear();
       router.navigate({ to: '/signin' });
     }
@@ -68,6 +70,12 @@ const httpService = {
       url,
       method: 'PATCH',
       data,
+    });
+  },
+  delete<TResponse>(url: string): HttpResponse<TResponse> {
+    return instance.request({
+      url,
+      method: 'DELETE',
     });
   },
 } as const;

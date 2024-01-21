@@ -26,6 +26,9 @@ const authorService = {
   ): HttpResponse<AuthorDetailDto, AuthorUpdateDto> {
     return httpService.patch(Endpoint.AUTHOR_UPDATE(secureId), data);
   },
+  delete(secureId: string): HttpResponse<AuthorDetailDto> {
+    return httpService.delete(Endpoint.AUTHOR_DELETE(secureId));
+  },
 };
 
 export default authorService;
