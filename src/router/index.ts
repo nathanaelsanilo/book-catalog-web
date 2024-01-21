@@ -1,4 +1,5 @@
 import App from '@/App';
+import { StorageKey } from '@/const';
 import AppLayout from '@/layouts/AppLayout';
 import AuthLayout from '@/layouts/AuthLayout';
 import HomePage from '@/pages/HomePage';
@@ -6,7 +7,7 @@ import SigninPage from '@/pages/auth/SigninPage';
 import SignupPage from '@/pages/auth/SignupPage';
 import AuthorFormPage from '@/pages/author/FormPage';
 import AuthorIndexPage from '@/pages/author/IndexPage';
-import { RootRoute, Route, Router } from '@tanstack/react-router';
+import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
 
 const rootRoute = new RootRoute({
   component: App,
@@ -16,6 +17,14 @@ const AppLayoutRoute = new Route({
   getParentRoute: () => rootRoute,
   id: 'app-layout',
   component: AppLayout,
+  beforeLoad: async () => {
+    const token = localStorage.getItem(StorageKey.AccessToken);
+    if (!token) {
+      throw redirect({
+        to: '/signin',
+      });
+    }
+  },
 });
 
 // #region Auth routes
