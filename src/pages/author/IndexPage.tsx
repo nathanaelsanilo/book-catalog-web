@@ -22,6 +22,7 @@ const IndexPage = () => {
                 email={e.email}
                 phone={e.phone}
                 name={e.name}
+                secureId={e.secureId}
                 key={e.secureId}
               />
             ))

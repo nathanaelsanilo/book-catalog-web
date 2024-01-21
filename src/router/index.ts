@@ -5,6 +5,7 @@ import AuthLayout from '@/layouts/AuthLayout';
 import HomePage from '@/pages/HomePage';
 import SigninPage from '@/pages/auth/SigninPage';
 import SignupPage from '@/pages/auth/SignupPage';
+import AuthorDetailPage from '@/pages/author/DetailPage';
 import AuthorFormPage from '@/pages/author/FormPage';
 import AuthorIndexPage from '@/pages/author/IndexPage';
 import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
@@ -68,10 +69,22 @@ const AuthorIndexRoute = new Route({
   component: AuthorIndexPage,
 });
 
-const AuthorFormRoute = new Route({
+const AuthorCreateRoute = new Route({
   getParentRoute: () => AuthorRoute,
   path: 'create',
   component: AuthorFormPage,
+});
+
+const AuthorEditRoute = new Route({
+  getParentRoute: () => AuthorRoute,
+  path: '$authorId/edit',
+  component: AuthorFormPage,
+});
+
+const AuthorDetailRoute = new Route({
+  getParentRoute: () => AuthorRoute,
+  path: '$authorId',
+  component: AuthorDetailPage,
 });
 
 // #endregion
@@ -80,7 +93,12 @@ const routeTree = rootRoute.addChildren([
   AuthLayoutRoute.addChildren([SignupRoute, SigninRoute]),
   AppLayoutRoute.addChildren([
     HomeRoute,
-    AuthorRoute.addChildren([AuthorIndexRoute, AuthorFormRoute]),
+    AuthorRoute.addChildren([
+      AuthorIndexRoute,
+      AuthorDetailRoute,
+      AuthorCreateRoute,
+      AuthorEditRoute,
+    ]),
   ]),
 ]);
 

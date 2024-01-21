@@ -4,4 +4,5 @@ export const Endpoint = {
   SIGNIN: '/auth/signin',
   AUTHOR_CREATE: '/author',
   AUTHOR_LIST: '/author',
+  AUTHOR_DETAIL: (secureId: string) => `/author/${secureId}`,
 } as const;

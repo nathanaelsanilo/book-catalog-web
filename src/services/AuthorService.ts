@@ -12,6 +12,9 @@ const authorService = {
   getList(): HttpResponse<AuthorListDto[]> {
     return httpService.get(Endpoint.AUTHOR_LIST);
   },
+  getDetail(secureId: string): HttpResponse<AuthorDetailDto> {
+    return httpService.get(Endpoint.AUTHOR_DETAIL(secureId));
+  },
 };
 
 export default authorService;
