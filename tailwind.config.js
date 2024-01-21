@@ -1,4 +1,5 @@
 import forms from '@tailwindcss/forms';
+import headlessUi from '@headlessui/tailwindcss';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -6,5 +7,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [forms],
+  plugins: [forms, headlessUi],
 };
