@@ -53,7 +53,11 @@ const httpService = {
     url: string,
     config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<TResponse>> {
-    return instance.get(url, config);
+    return instance.request({
+      url,
+      method: 'get',
+      ...config,
+    });
   },
   post<TResponse, TData>(
     url: string,

@@ -4,6 +4,7 @@ export * from './useAuthorDetailQuery';
 export * from './useAuthorListQuery';
 export * from './useAuthorUpdateMutation';
 export * from './useCategoryCreateMutation';
+export * from './useCategoryDetailQuery';
 export * from './useCategoryListQuery';
 export * from './useMeQuery';
 export * from './useNotie';

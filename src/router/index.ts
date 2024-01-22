@@ -10,6 +10,7 @@ import AuthorFormPage from '@/pages/author/FormPage';
 import AuthorIndexPage from '@/pages/author/IndexPage';
 import CategoryIndexPage from '@/pages/category/IndexPage';
 import CategoryFormPage from '@/pages/category/FormPage';
+import CategoryDetailpage from '@/pages/category/DetailPage';
 import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
 
 const rootRoute = new RootRoute({
@@ -110,6 +111,12 @@ const CategoryCreateRoute = new Route({
   component: CategoryFormPage,
 });
 
+const CategoryDetailRoute = new Route({
+  getParentRoute: () => CategoryRoute,
+  path: '/$categoryId',
+  component: CategoryDetailpage,
+});
+
 // #endregion
 
 const routeTree = rootRoute.addChildren([
@@ -122,7 +129,11 @@ const routeTree = rootRoute.addChildren([
       AuthorCreateRoute,
       AuthorEditRoute,
     ]),
-    CategoryRoute.addChildren([CategoryIndexRoute, CategoryCreateRoute]),
+    CategoryRoute.addChildren([
+      CategoryIndexRoute,
+      CategoryCreateRoute,
+      CategoryDetailRoute,
+    ]),
   ]),
 ]);
 

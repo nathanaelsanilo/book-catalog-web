@@ -12,6 +12,9 @@ const categoryService = {
   getList(): HttpResponse<CategoryListDto[]> {
     return httpService.get(Endpoint.CATEGORY_LIST);
   },
+  getDetail(secureId: string): HttpResponse<CategoryDetailDto> {
+    return httpService.get(Endpoint.CATEGORY_DETAIL(secureId));
+  },
 };
 
 export default categoryService;

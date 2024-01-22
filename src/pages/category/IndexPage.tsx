@@ -1,8 +1,10 @@
 import { CategoryCard, RButton, RDivider, RTitle } from '@/components';
 import { useCategoryListQuery } from '@/hooks';
 import { Link } from '@tanstack/react-router';
+import { useTitle } from 'react-use';
 
 const IndexPage = () => {
+  useTitle('Category');
   const { data, isLoading } = useCategoryListQuery();
 
   return (
@@ -18,7 +20,13 @@ const IndexPage = () => {
       {data ? (
         <div className='grid gap-x-6 gap-y-8 grid-cols-4'>
           {data.data.map((e) => (
-            <CategoryCard key={e.secureId} name={e.name} />
+            <Link
+              key={e.secureId}
+              to='/category/$categoryId'
+              params={{ categoryId: e.secureId }}
+            >
+              <CategoryCard name={e.name} />
+            </Link>
           ))}
         </div>
       ) : null}

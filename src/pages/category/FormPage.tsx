@@ -3,6 +3,7 @@ import { CategoryCreateDto } from '@/dtos';
 import { useCategoryCreateMutation, useNotie } from '@/hooks';
 import { useNavigate } from '@tanstack/react-router';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTitle } from 'react-use';
 
 type FormValues = {
   name: string;
@@ -10,6 +11,7 @@ type FormValues = {
 };
 
 const FormPage = () => {
+  useTitle('Create Category');
   const methods = useForm<FormValues>();
   const navigate = useNavigate();
   const { success } = useNotie();
