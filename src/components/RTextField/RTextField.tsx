@@ -14,7 +14,7 @@ const RTextField = ({ label, id, type = 'text', validation }: Props) => {
   } = useFormContext();
 
   return (
-    <div className='flex flex-col gap-2 mb-4'>
+    <div className='flex flex-col gap-2'>
       <label htmlFor={id} className='text-gray-700'>
         {label}
       </label>

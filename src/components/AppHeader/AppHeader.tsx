@@ -34,6 +34,14 @@ const AppHeader = () => {
               Authors
             </Link>
           </li>
+          <li>
+            <Link
+              to='/category'
+              className='hover:text-blue-700 transition-all ease-in-out'
+            >
+              Category
+            </Link>
+          </li>
         </ul>
       </div>
       <div className='space-x-4'>

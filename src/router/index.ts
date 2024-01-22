@@ -8,6 +8,8 @@ import SignupPage from '@/pages/auth/SignupPage';
 import AuthorDetailPage from '@/pages/author/DetailPage';
 import AuthorFormPage from '@/pages/author/FormPage';
 import AuthorIndexPage from '@/pages/author/IndexPage';
+import CategoryIndexPage from '@/pages/category/IndexPage';
+import CategoryFormPage from '@/pages/category/FormPage';
 import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
 
 const rootRoute = new RootRoute({
@@ -89,6 +91,27 @@ const AuthorDetailRoute = new Route({
 
 // #endregion
 
+// #region category routes
+
+const CategoryRoute = new Route({
+  getParentRoute: () => AppLayoutRoute,
+  path: 'category',
+});
+
+const CategoryIndexRoute = new Route({
+  getParentRoute: () => CategoryRoute,
+  path: '/',
+  component: CategoryIndexPage,
+});
+
+const CategoryCreateRoute = new Route({
+  getParentRoute: () => CategoryRoute,
+  path: '/create',
+  component: CategoryFormPage,
+});
+
+// #endregion
+
 const routeTree = rootRoute.addChildren([
   AuthLayoutRoute.addChildren([SignupRoute, SigninRoute]),
   AppLayoutRoute.addChildren([
@@ -99,6 +122,7 @@ const routeTree = rootRoute.addChildren([
       AuthorCreateRoute,
       AuthorEditRoute,
     ]),
+    CategoryRoute.addChildren([CategoryIndexRoute, CategoryCreateRoute]),
   ]),
 ]);
 

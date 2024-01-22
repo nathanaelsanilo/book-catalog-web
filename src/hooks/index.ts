@@ -3,6 +3,7 @@ export * from './useAuthorDeleteMutation';
 export * from './useAuthorDetailQuery';
 export * from './useAuthorListQuery';
 export * from './useAuthorUpdateMutation';
+export * from './useCategoryCreateMutation';
 export * from './useMeQuery';
 export * from './useNotie';
 export * from './useSigninMutation';

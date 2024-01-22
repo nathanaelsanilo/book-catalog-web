@@ -85,7 +85,7 @@ const FormPage = () => {
             <h2 className='text-lg font-bold mb-4'>
               {isEdit ? 'Edit author' : 'Create new author'}
             </h2>
-            <div className='space-y-4'>
+            <div className='space-y-6'>
               <RTextField
                 validation={{ required: 'Required!' }}
                 label='Author Name'
