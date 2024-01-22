@@ -1,6 +1,8 @@
 import { RButton, RDivider, RTitle } from '@/components';
-import { useCategoryDetailQuery } from '@/hooks';
-import { Link, useParams } from '@tanstack/react-router';
+import { useCategoryDetailQuery, useNotie } from '@/hooks';
+import { useCategoryDeleteMutation } from '@/hooks/useCategoryDeleteMutation';
+import { Link, useNavigate, useParams } from '@tanstack/react-router';
+import { FiTrash } from 'react-icons/fi';
 import { GoPencil } from 'react-icons/go';
 import { useTitle } from 'react-use';
 
@@ -9,7 +11,20 @@ const DetailPage = () => {
   const { categoryId } = useParams({
     from: '/app-layout/category/$categoryId',
   });
+  const navigate = useNavigate({ from: '/category/$categoryId' });
+  const { success } = useNotie();
   const { data, isLoading } = useCategoryDetailQuery(categoryId);
+  const { mutate: doDelete, isPending } = useCategoryDeleteMutation({
+    onSuccess: ({ data }) => {
+      success({
+        text: `${data.name} deleted`,
+      });
+      navigate({ to: '/category' });
+    },
+  });
+  const handleDelete = () => {
+    doDelete(categoryId);
+  };
   return (
     <section>
       <div className='flex items-center justify-between'>
@@ -49,7 +64,7 @@ const DetailPage = () => {
             </>
           </ul>
         ) : null}
-        <div className='mt-8'>
+        <div className='mt-8 space-x-4'>
           <Link
             to={'/category/$categoryId/edit'}
             params={{ categoryId: categoryId }}
@@ -59,6 +74,10 @@ const DetailPage = () => {
               <span className=''>Edit</span>
             </RButton>
           </Link>
+          <RButton variant='red' loading={isPending} onClick={handleDelete}>
+            <FiTrash className='w-4 h-4 inline align-text-top mr-2' />
+            <span className=''>Delete</span>
+          </RButton>
         </div>
       </div>
     </section>

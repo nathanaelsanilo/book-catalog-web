@@ -26,6 +26,9 @@ const categoryService = {
   ): HttpResponse<CategoryDetailDto, CategoryUpdateDto> {
     return httpService.patch(Endpoint.CATEGORY_UPDATE(secureId), dto);
   },
+  delete(secureId: string): HttpResponse<CategoryDetailDto> {
+    return httpService.delete(Endpoint.CATEGORY_DELETE(secureId));
+  },
 };
 
 export default categoryService;
