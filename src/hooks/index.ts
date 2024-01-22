@@ -6,6 +6,7 @@ export * from './useAuthorUpdateMutation';
 export * from './useCategoryCreateMutation';
 export * from './useCategoryDetailQuery';
 export * from './useCategoryListQuery';
+export * from './useCategoryUpdateMutation';
 export * from './useMeQuery';
 export * from './useNotie';
 export * from './useSigninMutation';

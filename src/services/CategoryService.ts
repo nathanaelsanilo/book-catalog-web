@@ -1,5 +1,10 @@
 import { Endpoint } from '@/const';
-import { CategoryCreateDto, CategoryDetailDto, CategoryListDto } from '@/dtos';
+import {
+  CategoryCreateDto,
+  CategoryDetailDto,
+  CategoryListDto,
+  CategoryUpdateDto,
+} from '@/dtos';
 import { httpService } from '.';
 import { HttpResponse } from '@/types';
 
@@ -14,6 +19,12 @@ const categoryService = {
   },
   getDetail(secureId: string): HttpResponse<CategoryDetailDto> {
     return httpService.get(Endpoint.CATEGORY_DETAIL(secureId));
+  },
+  update(
+    secureId: string,
+    dto: CategoryUpdateDto,
+  ): HttpResponse<CategoryDetailDto, CategoryUpdateDto> {
+    return httpService.patch(Endpoint.CATEGORY_UPDATE(secureId), dto);
   },
 };
 

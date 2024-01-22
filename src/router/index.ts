@@ -117,6 +117,12 @@ const CategoryDetailRoute = new Route({
   component: CategoryDetailpage,
 });
 
+const CategoryEditRoute = new Route({
+  getParentRoute: () => CategoryRoute,
+  path: '/$categoryId/edit',
+  component: CategoryFormPage,
+});
+
 // #endregion
 
 const routeTree = rootRoute.addChildren([
@@ -133,6 +139,7 @@ const routeTree = rootRoute.addChildren([
       CategoryIndexRoute,
       CategoryCreateRoute,
       CategoryDetailRoute,
+      CategoryEditRoute,
     ]),
   ]),
 ]);

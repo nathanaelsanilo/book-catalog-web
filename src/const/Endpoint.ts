@@ -10,4 +10,5 @@ export const Endpoint = {
   CATEGORY_LIST: '/category',
   CATEGORY_CREATE: '/category',
   CATEGORY_DETAIL: (secureId: string) => `/category/${secureId}`,
+  CATEGORY_UPDATE: (secureId: string) => `/category/${secureId}`,
 } as const;

@@ -1,6 +1,7 @@
-import { RDivider, RTitle } from '@/components';
-import { useParams } from '@tanstack/react-router';
+import { RButton, RDivider, RTitle } from '@/components';
 import { useCategoryDetailQuery } from '@/hooks';
+import { Link, useParams } from '@tanstack/react-router';
+import { GoPencil } from 'react-icons/go';
 import { useTitle } from 'react-use';
 
 const DetailPage = () => {
@@ -48,6 +49,17 @@ const DetailPage = () => {
             </>
           </ul>
         ) : null}
+        <div className='mt-8'>
+          <Link
+            to={'/category/$categoryId/edit'}
+            params={{ categoryId: categoryId }}
+          >
+            <RButton variant='blue'>
+              <GoPencil className='w-4 h-4 inline align-text-top mr-2' />
+              <span className=''>Edit</span>
+            </RButton>
+          </Link>
+        </div>
       </div>
     </section>
   );
