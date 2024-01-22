@@ -12,7 +12,7 @@ interface Props {
 
 const AuthorCard = ({ name, email, secureId }: Props) => {
   return (
-    <div className='bg-white border-2 border-gray-100 rounded-lg w-full'>
+    <div className='bg-white border border-gray-300 rounded-lg w-full'>
       <div className='flex items-center justify-between w-full px-6 py-8'>
         <div className=''>
           <h4 className='text-gray-600'>{name}</h4>

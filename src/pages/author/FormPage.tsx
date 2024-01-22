@@ -18,7 +18,7 @@ type FormValues = {
 };
 
 const FormPage = () => {
-  const { authorId } = useParams({ strict: false });
+  const { authorId } = useParams({ from: '/app-layout/author/$authorId/edit' });
   const [isEdit] = useState<boolean>(!!authorId);
   useTitle(isEdit ? 'Edit Author' : 'Create new Author');
   const { data } = useAuthorDetailQuery(authorId, { enabled: !!authorId });

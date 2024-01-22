@@ -11,7 +11,7 @@ import { useTitle } from 'react-use';
 
 const DetailPage = () => {
   useTitle('Detail Author');
-  const { authorId } = useParams({ strict: false });
+  const { authorId } = useParams({ from: '/app-layout/author/$authorId' });
   const { data, isLoading } = useAuthorDetailQuery(authorId, {
     enabled: !!authorId,
   });
