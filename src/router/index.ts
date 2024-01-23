@@ -12,6 +12,7 @@ import CategoryIndexPage from '@/pages/category/IndexPage';
 import CategoryFormPage from '@/pages/category/FormPage';
 import CategoryDetailpage from '@/pages/category/DetailPage';
 import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
+import PublisherIndexPage from '@/pages/publisher/IndexPage';
 
 const rootRoute = new RootRoute({
   component: App,
@@ -125,6 +126,21 @@ const CategoryEditRoute = new Route({
 
 // #endregion
 
+//#region publisher routes
+
+const PublisherRoute = new Route({
+  getParentRoute: () => AppLayoutRoute,
+  path: 'publisher',
+});
+
+const PublisherIndexRoute = new Route({
+  getParentRoute: () => PublisherRoute,
+  path: '/',
+  component: PublisherIndexPage,
+});
+
+//#endregion
+
 const routeTree = rootRoute.addChildren([
   AuthLayoutRoute.addChildren([SignupRoute, SigninRoute]),
   AppLayoutRoute.addChildren([
@@ -141,6 +157,7 @@ const routeTree = rootRoute.addChildren([
       CategoryDetailRoute,
       CategoryEditRoute,
     ]),
+    PublisherRoute.addChildren([PublisherIndexRoute]),
   ]),
 ]);
 
