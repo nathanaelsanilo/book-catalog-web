@@ -6,6 +6,8 @@ export * from './CategoryCreateDto';
 export * from './CategoryDetailDto';
 export * from './CategoryListDto';
 export * from './CategoryUpdateDto';
+export * from './PublisherCreateDto';
+export * from './PublisherDetailDto';
 export * from './PublisherListDto';
 export * from './SigninDto';
 export * from './SigninResDto';

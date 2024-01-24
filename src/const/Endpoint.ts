@@ -13,4 +13,5 @@ export const Endpoint = {
   CATEGORY_UPDATE: (secureId: string) => `/category/${secureId}`,
   CATEGORY_DELETE: (secureId: string) => `/category/${secureId}`,
   PUBLISHER_LIST: '/publisher',
+  PUBLISHER_CREATE: '/publisher',
 } as const;

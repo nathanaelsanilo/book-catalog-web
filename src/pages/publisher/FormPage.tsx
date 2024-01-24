@@ -1,24 +1,37 @@
 import { RButton, RDivider, RTextField, RTitle, RSwitch } from '@/components';
+import { PublisherCreateDto } from '@/dtos';
+import { useNotie, usePublisherCreateMutation } from '@/hooks';
+import { useNavigate } from '@tanstack/react-router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTitle } from 'react-use';
 
-type FormValues = {
-  name: string;
-  description: string;
-  email: string;
-  active: boolean;
-};
-
 const FormPage = () => {
   useTitle('Create Publisher');
-  const methods = useForm<FormValues>({
+  const { success } = useNotie();
+  const navigate = useNavigate({ from: '/publisher/create' });
+
+  const methods = useForm<PublisherCreateDto>({
     defaultValues: {
       active: true,
     },
   });
 
+  const { mutate: doCreate, isPending: isCreating } =
+    usePublisherCreateMutation({
+      onSuccess: ({ data }) => {
+        success({ text: `${data.name} created` });
+        navigate({ to: '/publisher' });
+      },
+    });
+
   const onSubmit = methods.handleSubmit((val) => {
-    console.log({ val });
+    const dto = new PublisherCreateDto({
+      active: val.active,
+      description: val.description,
+      email: val.email,
+      name: val.name,
+    });
+    doCreate(dto);
   });
 
   return (
@@ -46,7 +59,7 @@ const FormPage = () => {
               </div>
               <RTextField label='Description' id='description' />
               <RSwitch label='Active' id='active' />
-              <RButton variant='blue' type='submit' loading={false}>
+              <RButton variant='blue' type='submit' loading={isCreating}>
                 Add publisher
               </RButton>
             </div>

@@ -9,5 +9,6 @@ export * from './useCategoryListQuery';
 export * from './useCategoryUpdateMutation';
 export * from './useMeQuery';
 export * from './useNotie';
+export * from './usePublisherCreateMutation';
 export * from './useSigninMutation';
 export * from './useSignupMutation';
