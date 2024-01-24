@@ -6,5 +6,6 @@ export * from './CategoryCard';
 export * from './PublisherCard';
 export * from './RButton';
 export * from './RDivider';
+export * from './RSwitch';
 export * from './RTextField';
 export * from './RTitle';

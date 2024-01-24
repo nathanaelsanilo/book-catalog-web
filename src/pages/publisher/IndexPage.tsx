@@ -1,16 +1,20 @@
 import { AppPage, RButton, PublisherCard } from '@/components';
 import { RGrid } from '@/components/RGrid';
+import { usePublisherListQuery } from '@/hooks/usePublisherListQuery';
 import { Link } from '@tanstack/react-router';
 import { useTitle } from 'react-use';
 
 const IndexPage = () => {
   useTitle('Publisher');
+
+  const { data } = usePublisherListQuery();
+
   return (
     <AppPage
       title='Publisher'
       action={
         <AppPage.PageAction>
-          <Link to='/category/create'>
+          <Link to='/publisher/create'>
             <RButton variant='blue'>Create new publisher</RButton>
           </Link>
         </AppPage.PageAction>
@@ -18,10 +22,15 @@ const IndexPage = () => {
     >
       <RGrid cols={4}>
         <RGrid.RGridItem>
-          <PublisherCard
-            name='Gramedia'
-            email='gramedia@publisher.com'
-          ></PublisherCard>
+          {data
+            ? data.data.map((item) => (
+                <PublisherCard
+                  key={item.secureId}
+                  name={item.name}
+                  email={item.email}
+                />
+              ))
+            : null}
         </RGrid.RGridItem>
       </RGrid>
     </AppPage>

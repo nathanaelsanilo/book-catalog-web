@@ -8,11 +8,12 @@ import SignupPage from '@/pages/auth/SignupPage';
 import AuthorDetailPage from '@/pages/author/DetailPage';
 import AuthorFormPage from '@/pages/author/FormPage';
 import AuthorIndexPage from '@/pages/author/IndexPage';
-import CategoryIndexPage from '@/pages/category/IndexPage';
-import CategoryFormPage from '@/pages/category/FormPage';
 import CategoryDetailpage from '@/pages/category/DetailPage';
-import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
+import CategoryFormPage from '@/pages/category/FormPage';
+import CategoryIndexPage from '@/pages/category/IndexPage';
+import PublisherFormPage from '@/pages/publisher/FormPage';
 import PublisherIndexPage from '@/pages/publisher/IndexPage';
+import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
 
 const rootRoute = new RootRoute({
   component: App,
@@ -139,6 +140,12 @@ const PublisherIndexRoute = new Route({
   component: PublisherIndexPage,
 });
 
+const PublisherFormCreateRoute = new Route({
+  getParentRoute: () => PublisherRoute,
+  path: 'create',
+  component: PublisherFormPage,
+});
+
 //#endregion
 
 const routeTree = rootRoute.addChildren([
@@ -157,7 +164,7 @@ const routeTree = rootRoute.addChildren([
       CategoryDetailRoute,
       CategoryEditRoute,
     ]),
-    PublisherRoute.addChildren([PublisherIndexRoute]),
+    PublisherRoute.addChildren([PublisherIndexRoute, PublisherFormCreateRoute]),
   ]),
 ]);
 
