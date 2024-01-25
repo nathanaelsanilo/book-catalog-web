@@ -147,6 +147,12 @@ const PublisherFormCreateRoute = new Route({
   component: PublisherFormPage,
 });
 
+const PublisherFormEditRoute = new Route({
+  getParentRoute: () => PublisherRoute,
+  path: '$publisherId/edit',
+  component: PublisherFormPage,
+});
+
 const PublisherDetailRoute = new Route({
   getParentRoute: () => PublisherRoute,
   path: '$publisherId',
@@ -175,6 +181,7 @@ const routeTree = rootRoute.addChildren([
       PublisherIndexRoute,
       PublisherFormCreateRoute,
       PublisherDetailRoute,
+      PublisherFormEditRoute,
     ]),
   ]),
 ]);

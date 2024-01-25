@@ -15,4 +15,5 @@ export const Endpoint = {
   PUBLISHER_LIST: '/publisher',
   PUBLISHER_CREATE: '/publisher',
   PUBLISHER_DETAIL: (secureId: string) => `/publisher/${secureId}`,
+  PUBLISHER_UPDATE: (secureId: string) => `/publisher/${secureId}`,
 } as const;

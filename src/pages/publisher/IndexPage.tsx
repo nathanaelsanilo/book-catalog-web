@@ -1,6 +1,6 @@
-import { AppPage, RButton, PublisherCard } from '@/components';
+import { AppPage, PublisherCard, RButton } from '@/components';
 import { RGrid } from '@/components/RGrid';
-import { usePublisherListQuery } from '@/hooks/usePublisherListQuery';
+import { usePublisherListQuery } from '@/hooks';
 import { Link } from '@tanstack/react-router';
 import { useTitle } from 'react-use';
 

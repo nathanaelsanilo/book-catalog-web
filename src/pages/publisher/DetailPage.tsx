@@ -1,11 +1,12 @@
-import { AppPage, AppDetail } from '@/components';
+import { AppDetail, AppPage, RButton } from '@/components';
 import { usePublisherDetailQuery } from '@/hooks';
-import { useParams } from '@tanstack/react-router';
-import { useTitle } from 'react-use';
+import { Link, useParams } from '@tanstack/react-router';
+import { GoPencil } from 'react-icons/go';
 import {
   IoIosCheckmarkCircleOutline,
   IoMdCloseCircleOutline,
 } from 'react-icons/io';
+import { useTitle } from 'react-use';
 
 const DetailPage = () => {
   useTitle('Publisher Detail');
@@ -29,11 +30,26 @@ const DetailPage = () => {
               {data.data.active ? (
                 <IoIosCheckmarkCircleOutline className='icon-lg text-green-600' />
               ) : (
-                <IoMdCloseCircleOutline />
+                <IoMdCloseCircleOutline className='icon-lg text-red-600' />
               )}
             </AppDetail.Item>
           </AppDetail>
         ) : null}
+        <div className='space-x-4 mt-8'>
+          <Link
+            to={'/publisher/$publisherId/edit'}
+            params={{ publisherId: params.publisherId }}
+          >
+            <RButton variant='blue'>
+              <GoPencil className='w-4 h-4 inline align-text-top mr-2' />
+              <span className=''>Edit</span>
+            </RButton>
+          </Link>
+          {/* <RButton variant='red' loading={isPending} onClick={handleDelete}>
+            <FiTrash className='w-4 h-4 inline align-text-top mr-2' />
+            <span className=''>Delete</span>
+          </RButton> */}
+        </div>
       </div>
     </AppPage>
   );

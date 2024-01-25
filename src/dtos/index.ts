@@ -9,6 +9,7 @@ export * from './CategoryUpdateDto';
 export * from './PublisherCreateDto';
 export * from './PublisherDetailDto';
 export * from './PublisherListDto';
+export * from './PublisherUpdateDto';
 export * from './SigninDto';
 export * from './SigninResDto';
 export * from './SignupDto';

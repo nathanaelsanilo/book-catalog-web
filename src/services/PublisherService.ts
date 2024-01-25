@@ -3,6 +3,7 @@ import {
   PublisherCreateDto,
   PublisherDetailDto,
   PublisherListDto,
+  PublisherUpdateDto,
 } from '@/dtos';
 import { HttpResponse } from '@/types';
 import { httpService } from '.';
@@ -18,6 +19,12 @@ const publisherService = {
   },
   getDetail(secureId: string): HttpResponse<PublisherDetailDto> {
     return httpService.get(Endpoint.PUBLISHER_DETAIL(secureId));
+  },
+  update(
+    secureId: string,
+    data: PublisherUpdateDto,
+  ): HttpResponse<PublisherDetailDto, PublisherUpdateDto> {
+    return httpService.patch(Endpoint.PUBLISHER_UPDATE(secureId), data);
   },
 };
 
