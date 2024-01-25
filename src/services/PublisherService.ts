@@ -16,6 +16,9 @@ const publisherService = {
   ): HttpResponse<PublisherDetailDto, PublisherCreateDto> {
     return httpService.post(Endpoint.PUBLISHER_CREATE, dto);
   },
+  getDetail(secureId: string): HttpResponse<PublisherDetailDto> {
+    return httpService.get(Endpoint.PUBLISHER_DETAIL(secureId));
+  },
 };
 
 export default publisherService;

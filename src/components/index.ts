@@ -1,3 +1,4 @@
+export * from './AppDetail';
 export * from './AppHeader';
 export * from './AppPage';
 export * from './Auth';

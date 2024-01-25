@@ -11,6 +11,7 @@ import AuthorIndexPage from '@/pages/author/IndexPage';
 import CategoryDetailpage from '@/pages/category/DetailPage';
 import CategoryFormPage from '@/pages/category/FormPage';
 import CategoryIndexPage from '@/pages/category/IndexPage';
+import PublisherDetailPage from '@/pages/publisher/DetailPage';
 import PublisherFormPage from '@/pages/publisher/FormPage';
 import PublisherIndexPage from '@/pages/publisher/IndexPage';
 import { RootRoute, Route, Router, redirect } from '@tanstack/react-router';
@@ -146,6 +147,12 @@ const PublisherFormCreateRoute = new Route({
   component: PublisherFormPage,
 });
 
+const PublisherDetailRoute = new Route({
+  getParentRoute: () => PublisherRoute,
+  path: '$publisherId',
+  component: PublisherDetailPage,
+});
+
 //#endregion
 
 const routeTree = rootRoute.addChildren([
@@ -164,7 +171,11 @@ const routeTree = rootRoute.addChildren([
       CategoryDetailRoute,
       CategoryEditRoute,
     ]),
-    PublisherRoute.addChildren([PublisherIndexRoute, PublisherFormCreateRoute]),
+    PublisherRoute.addChildren([
+      PublisherIndexRoute,
+      PublisherFormCreateRoute,
+      PublisherDetailRoute,
+    ]),
   ]),
 ]);
 

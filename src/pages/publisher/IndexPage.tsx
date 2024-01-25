@@ -26,6 +26,7 @@ const IndexPage = () => {
             ? data.data.map((item) => (
                 <PublisherCard
                   key={item.secureId}
+                  secureId={item.secureId}
                   name={item.name}
                   email={item.email}
                 />

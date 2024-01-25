@@ -14,4 +14,5 @@ export const Endpoint = {
   CATEGORY_DELETE: (secureId: string) => `/category/${secureId}`,
   PUBLISHER_LIST: '/publisher',
   PUBLISHER_CREATE: '/publisher',
+  PUBLISHER_DETAIL: (secureId: string) => `/publisher/${secureId}`,
 } as const;

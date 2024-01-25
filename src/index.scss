@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .icon {
+        &-md {
+            height: theme('height.4');
+            width: theme('width.4');
+        }
+
+        &-lg {
+            height: theme('height.8');
+            width: theme('width.8');
+        }
+    }
+}
+
 html, body {
     @apply h-screen bg-white;
 }
